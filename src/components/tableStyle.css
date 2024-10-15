@@ -1,0 +1,176 @@
+/* Styling for the table headers */
+.container-with-sidebar {
+  display: flex;
+  height: 100vh; /* Makes sure it stretches full height of the screen */
+}
+
+.sidebar {
+  width: 250px; /* Adjust width to whatever you want */
+  background-color: #f4f4f4; /* Set background color */
+  padding: 20px;
+  box-shadow: 2px 0 5px rgba(0,0,0,0.1); /* Optional shadow for a more distinct sidebar */
+}
+
+th {
+  color: black;          /* Makes the text black */
+  cursor: pointer;       /* Shows a pointer when hovering */
+  /* padding: 10px;         Adds padding to make the headers look better */
+  /* text-align: center;      Aligns text to the left */
+
+}
+
+th, td{
+  border-right: 1px solid #0e0909;
+  text-align: center;
+}
+
+thead{
+  border-bottom: 1px solid black;
+}
+
+/* Styling for the sort arrows */
+th::after {
+  content: '';           /* Ensure there's no default content */
+}
+
+th:last-child, td:last-child{
+  border-right: none;
+}
+
+th.sort-ascending::after {
+  content: ' ▲';         /* Adds an up arrow for ascending order */
+  color: black;          /* Makes the arrow black */
+}
+
+th.sort-descending::after {
+  content: ' ▼';         /* Adds a down arrow for descending order */
+  color: black;          /* Makes the arrow black */
+}
+
+.tableData{
+  width: 100%;
+  /* text-align: left; */
+  border-collapse: collapse;
+  margin-top: 3rem;
+}
+
+
+.previousNext-container{
+  margin-top: 2rem;
+  display: flex;              /* Use flexbox for layout */
+  justify-content: center;     /*Center the entire container
+  /* align-items: center;       */
+  margin-top: 2rem;   
+  gap:3rem;
+}
+
+.previousButton{
+  color:white;
+  padding-left:10px;
+  padding-right:10px;
+  padding-top:10px;
+  padding-bottom: 10px;
+  background-color: blue;
+}
+
+.nextButton{
+  color:white;
+  padding-left:10px;
+  padding-right:10px;
+  padding-top:10px;
+  padding-bottom: 10px;
+  background-color: blue;
+}
+
+.form-container label {
+  display: block;
+  font-weight: bold;
+  font-size: 16px; /* Increase font size for better visibility */
+  margin-bottom: 8px; /* Adds more space between label and input */
+  color: black; /* Ensure the label color is visible */
+}
+
+.form-container input {
+  width: 100%;
+  padding: 10px; /* Increase padding for better input field visibility */
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px; /* Increase input text size */
+}
+
+button {
+  padding: 10px 20px; /* Adjust button padding */
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px; /* Make the button text size larger */
+}
+
+.entire-container {
+  flex-grow: 1; /* Ensures that the main content takes the rest of the space */
+  padding: 20px;
+}
+
+.sidebar-item {
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+.sidebar-item a {
+  text-decoration: none;
+  color: #333;
+  transition: color 0.3s;
+}
+
+.sidebar-item a:hover {
+  color: #007bff; /* Change color when hovered */
+}
+
+.employeeHeader{
+  /* border: 2px solid; */
+  text-align: center;
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: center;
+  gap:7rem;
+}
+
+.excelDownloadContainer{
+  border: 1px solid;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  border-radius: 1rem;
+  background-color: green
+}
+
+.form-info{
+  margin-bottom: 2rem;
+}
+
+.submit-container{
+  padding-bottom:1rem;
+  margin-bottom: 16px;
+  text-align: center;
+  /* border: 2px solid darkseagreen; */
+  padding-top: 13px;
+}
+
+.submit-container button{
+  border: 1px solid green;
+  color: white;
+  padding: 13px;
+  background-color: green;
+}
+
+.search-container{
+  margin-bottom: "10px";
+  padding: "5px";
+  width: "100%";
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  border: 1px solid;
+  border-radius: 1rem;
+  padding-left: 1rem;
+}
+

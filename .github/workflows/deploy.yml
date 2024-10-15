@@ -3,7 +3,7 @@ name: Deploy
 on:
   push:
     branches:
-      - master  # Ensure this matches your branch
+      - master
 
 jobs:
   build:

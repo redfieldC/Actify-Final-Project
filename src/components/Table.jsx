@@ -34,13 +34,15 @@ const Table = () => {
   });
 
   const filteredData = sortedData.filter((row) => {
+    const searchLower = searchTerm.toLowerCase(); // Convert search term to lower case
     return (
-      row.id.toString().includes(searchTerm.toLowerCase()) ||
-      row.name.toString().includes(searchTerm.toLowerCase()) ||
-      row.age.toString().includes(searchTerm.toLowerCase()) ||
-      row.job.toString().includes(searchTerm.toLowerCase())
+      row.id.toString().toLowerCase().includes(searchLower) ||
+      row.name.toLowerCase().includes(searchLower) || // Convert name to lower case
+      row.age.toString().toLowerCase().includes(searchLower) || // Convert age to lower case
+      row.job.toLowerCase().includes(searchLower) // Convert job to lower case
     );
   });
+  
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;

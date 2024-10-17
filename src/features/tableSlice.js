@@ -146,9 +146,14 @@ const initialState = {
 const tableSlice = createSlice({
   name: "table",
   initialState,
-  reducers: {},
+  reducers: {
+    addItem:(state,action)=>{
+      state.data.push(action.payload)
+    }
+  },
 });
 
+export const {addItem} = tableSlice.actions;
 export const selectTableData = (state) => state.table.data;
 
 export default tableSlice.reducer;

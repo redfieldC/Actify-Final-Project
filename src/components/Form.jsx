@@ -1,6 +1,8 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import "./tableStyle.css";
+import { useDispatch } from "react-redux";
+import { addItem } from "../features/tableSlice";
 
 const Form = () => {
   const {
@@ -9,13 +11,19 @@ const Form = () => {
     formState: { errors },
     reset,
   } = useForm();
-  const onSubmit = (data) => {
-    console.log(data);
+  const dispatch = useDispatch();
+  const handleAddItem = (data) => {
+    dispatch(addItem(data));
     reset();
   };
 
+  // const handleAddItem =(data)=>[
+  //   dispatch(add)
+  // ]
+  
+
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="form-container">
+    <form onSubmit={handleSubmit(handleAddItem)} className="form-container">
       <div className="form-info">
         <label htmlFor="">ID</label>
         <input

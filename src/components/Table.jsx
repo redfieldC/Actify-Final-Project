@@ -14,6 +14,12 @@ const Table = () => {
     key: "",
     direction: "ascending",
   });
+  const [visibleColumns, setVisibleColumns] = useState({
+    id: true,
+    name: true,
+    age: true,
+    job: true
+  })
 
   const handleSort = (key) => {
     let direction = "ascending";
@@ -42,7 +48,7 @@ const Table = () => {
       row.job.toLowerCase().includes(searchLower) // Convert job to lower case
     );
   });
-  
+
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
@@ -73,6 +79,13 @@ const Table = () => {
     XLSX.utils.book_append_sheet(workbook, worksheet, "Filtered Data");
     XLSX.writeFile(workbook, "Filtered_Employee_Data.xlsx");
   };
+
+  const toggleColumn = (column) => {
+    setVisibleColumns((prev) => ({
+      ...prev,
+      [column]: !prev[column],
+    }))
+  }
 
   return (
     <div className="container-with-sidebar">
@@ -114,67 +127,89 @@ const Table = () => {
           />
         </div>
 
-        <table className="tableData">
+        <div className="column-visibility-container">
+          <label htmlFor="">
+            <input type="checkbox" checked={visibleColumns.id}  onChange={()=>toggleColumn('id')}/>ID
+          </label>
+          <label htmlFor="">
+            <input type="checkbox" checked={visibleColumns.name}  onChange={()=>toggleColumn('name')}/>Name
+          </label>
+          <label htmlFor="">
+            <input type="checkbox" checked={visibleColumns.age}  onChange={()=>toggleColumn('age')}/>Age
+           </label>
+           <label htmlFor="">
+            <input type="checkbox" checked={visibleColumns.job}  onChange={()=>toggleColumn('job')}/>Job
+           </label>
+
+           <table className="tableData">
           <thead>
             <tr>
-              <th
-                onClick={() => handleSort("id")}
-                className={
-                  sortConfig.key === "id"
-                    ? sortConfig.direction === "ascending"
-                      ? "sort-ascending"
-                      : "sort-descending"
-                    : ""
-                }
-              >
-                ID
-              </th>
-              <th
-                onClick={() => handleSort("name")}
-                className={
-                  sortConfig.key === "name"
-                    ? sortConfig.direction === "ascending"
-                      ? "sort-ascending"
-                      : "sort-descending"
-                    : ""
-                }
-              >
-                Name
-              </th>
-              <th
-                onClick={() => handleSort("age")}
-                className={
-                  sortConfig.key === "age"
-                    ? sortConfig.direction === "ascending"
-                      ? "sort-ascending"
-                      : "sort-descending"
-                    : ""
-                }
-              >
-                Age
-              </th>
-              <th
-                onClick={() => handleSort("job")}
-                className={
-                  sortConfig.key === "job"
-                    ? sortConfig.direction === "ascending"
-                      ? "sort-ascending"
-                      : "sort-descending"
-                    : ""
-                }
-              >
-                Job
-              </th>
+              {visibleColumns.id && (
+                <th
+                  onClick={() => handleSort("id")}
+                  className={
+                    sortConfig.key === "id"
+                      ? sortConfig.direction === "ascending"
+                        ? "sort-ascending"
+                        : "sort-descending"
+                      : ""
+                  }
+                >
+                  ID
+                </th>
+              )}
+              {visibleColumns.name && (
+                <th
+                  onClick={() => handleSort("name")}
+                  className={
+                    sortConfig.key === "name"
+                      ? sortConfig.direction === "ascending"
+                        ? "sort-ascending"
+                        : "sort-descending"
+                      : ""
+                  }
+                >
+                  Name
+                </th>
+              )}
+              {visibleColumns.age && (
+                <th
+                  onClick={() => handleSort("age")}
+                  className={
+                    sortConfig.key === "age"
+                      ? sortConfig.direction === "ascending"
+                        ? "sort-ascending"
+                        : "sort-descending"
+                      : ""
+                  }
+                >
+                  Age
+                </th>
+              )}
+              {visibleColumns.job && (
+                <th
+                  onClick={() => handleSort("job")}
+                  className={
+                    sortConfig.key === "job"
+                      ? sortConfig.direction === "ascending"
+                        ? "sort-ascending"
+                        : "sort-descending"
+                      : ""
+                  }
+                >
+                  Job
+                </th>
+              )}
             </tr>
           </thead>
           <tbody>
             {currentItems.length > 0 ? (
               currentItems.map((row) => (
                 <tr key={row.id}>
-                  <td>{row.id}</td>
-                  <td>{row.name}</td>
-                  <td>{row.age}</td>
-                  <td>{row.job}</td>
+                  {visibleColumns.id && <td>{row.id}</td>}
+                  {visibleColumns.name && <td>{row.name}</td>}
+                  {visibleColumns.age && <td>{row.age}</td>}
+                  {visibleColumns.job && <td>{row.job}</td>}
                 </tr>
               ))
             ) : (
@@ -186,6 +221,7 @@ const Table = () => {
             )}
           </tbody>
         </table>
+        </div>
 
         <div className="previousNext-container">
           <button
